@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   var $newPostForm = $('#new-post-submit-form');
 
-  var postID = 1; // play around with data ID's and assignment - they may be affecting the modal functionality
+  var postID; // play around with data ID's and assignment - they may be affecting the modal functionality
 
   $addNew.on('click', function(){
     var $title = $('#title-input').val();
@@ -84,7 +84,7 @@ $(document).ready(function() {
   $('#delete-a-post').on('click', function(){
 
     $.ajax({
-      url: 'http://localhost:3000/api/posts/' + postID,
+      url: 'http://localhost:3000/api/posts/' + $(this).data('id'), // there's no get request first, so how does ajax know what the id is?
       type: 'DELETE',
       success: function() {
         $("#edit-post-modal").modal("hide");
