@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   var $newPostForm = $('#new-post-submit-form');
 
-  var postID = 1;
+  var postID = 1; // play around with data ID's and assignment - they may be affecting the modal functionality
 
   $addNew.on('click', function(){
     var $title = $('#title-input').val();
@@ -79,9 +79,9 @@ $(document).ready(function() {
   });
 
   // Delete a post
+  // Won't work more than one time
 
   $('#delete-a-post').on('click', function(){
-    alert("You clicked the delete button!");
 
     $.ajax({
       url: 'http://localhost:3000/api/posts/' + postID,
