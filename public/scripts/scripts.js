@@ -15,8 +15,6 @@ $(document).ready(function() {
     var $body = $('#body-input').val();
     var newPost = {title: $title, body: $body};
 
-    console.log("form submitted");
-
      // send POST request to server to create new phrase
      $.ajax({
   		type: "POST",
@@ -29,7 +27,6 @@ $(document).ready(function() {
   			alert("Error!");
   		}
 	   });
-
   });
 
   // Use templating to render blog posts to the view at index.html
@@ -42,17 +39,10 @@ $(document).ready(function() {
   			_.each(post, function(post) {
   				$("#new-blog-posts-rendered-here").append(template(post)); // this should be the id of where the template is appended
   			});
-
-        // var $editButton = $('.edit-button');
-        //
-        // $editButton.each( function() { // we have to loop through the edit buttons AFTER the AJAX request; otherwise, there's nothing to select in the DOM
-        //   $(this).on('click', function() {
-        //     alert("You clicked an edit button!");
-        //   });
-        // });
-
   		}
   	});
+
+    // Show modal when clicking edit button, $document ensures that we're looking at the current state of the DOM, not the DOM on load
 
     $(document).on("click", ".edit-button", function(event) {
   	event.preventDefault();
@@ -72,6 +62,8 @@ $(document).ready(function() {
 
   });
 
+  // Submit a post
+
   $('#submit-post').on('click', function(){
     var updatedPost = {title: $('#edit-title').val(), body: $('#edit-body').val()};
 
@@ -82,14 +74,11 @@ $(document).ready(function() {
       success: function(data) {
         $("#edit-post-modal").modal("hide");
         window.location.reload();
-    }
+      }
+    });
   });
 
-  // Delete a post -- not working and no idea why; I can't select the Delete button within the DOM
-
-  $('#delete-a-post').on('click', function() {
-    alert("Thanks for clicking!");
-  });
+  // Delete a post
 
   $('#delete-a-post').on('click', function(){
     alert("You clicked the delete button!");
@@ -103,10 +92,5 @@ $(document).ready(function() {
       }
     });
   });
-
-
-
-  });
-
 
 });
